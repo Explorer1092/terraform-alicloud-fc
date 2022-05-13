@@ -188,6 +188,12 @@ variable "events_function_handler" {
   default     = ""
 }
 
+variable "environment_variables" {
+  description = "environment_variables"
+  type        = map
+  default     = {}
+}
+
 # FC Function Variables
 variable "filter_service_with_name_regex" {
   description = "A regex string to filter results by FC service name."
