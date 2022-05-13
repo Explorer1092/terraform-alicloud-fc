@@ -34,6 +34,7 @@ resource "alicloud_fc_function" "http" {
   handler     = var.http_function_handler
   memory_size = var.function_memory_size
   timeout     = var.function_timeout
+  environment_variables = var.environment_variables
   depends_on  = [alicloud_fc_service.this]
 }
 
@@ -49,5 +50,6 @@ resource "alicloud_fc_function" "events" {
   handler     = var.events_function_handler
   memory_size = var.function_memory_size
   timeout     = var.function_timeout
+  environment_variables = var.environment_variables
   depends_on  = [alicloud_fc_service.this]
 }
