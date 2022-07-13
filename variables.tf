@@ -287,3 +287,11 @@ variable "source_role_policy_type" {
   type        = string
   default     = ""
 }
+
+variable "http_function_instance_concurrency" {
+  default     = 1
+}
+
+variable "events_function_instance_concurrency" {
+  default     = 1
+}

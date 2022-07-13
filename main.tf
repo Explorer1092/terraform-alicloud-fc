@@ -39,6 +39,7 @@ resource "alicloud_fc_function" "http" {
   oss_key     = var.http_function_oss_key == "" ? null : var.http_function_oss_key
   runtime     = var.http_function_runtime
   handler     = var.http_function_handler
+  instance_concurrency = var.http_function_instance_concurrency
   memory_size = var.function_memory_size
   timeout     = var.function_timeout
   environment_variables = var.environment_variables
@@ -55,6 +56,7 @@ resource "alicloud_fc_function" "events" {
   oss_key     = var.events_function_oss_key == "" ? null : var.events_function_oss_key
   runtime     = var.events_function_runtime
   handler     = var.events_function_handler
+  instance_concurrency = var.events_function_instance_concurrency
   memory_size = var.function_memory_size
   timeout     = var.function_timeout
   environment_variables = var.environment_variables
