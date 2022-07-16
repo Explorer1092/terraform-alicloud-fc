@@ -115,6 +115,7 @@ variable "http_function_filename" {
   default     = ""
 }
 
+
 variable "http_function_oss_bucket" {
   description = "The bucket of function's deployment package within the oss service. It is conflict with the filename."
   type        = string

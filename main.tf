@@ -22,9 +22,14 @@ resource "alicloud_fc_service" "this" {
 }
 
 data "alicloud_file_crc64_checksum" "http" {
+  count       = var.create_http_function ? 1 : 0
   filename = var.http_function_filename
 }
 
+data "alicloud_file_crc64_checksum" "events" {
+  count       = var.create_event_function ? 1 : 0
+  filename = var.events_function_filename
+}
 
 
 # FC Function
@@ -34,7 +39,7 @@ resource "alicloud_fc_function" "http" {
   name        = var.http_function_name
   description = var.fc_function_http_description
   filename    = var.http_function_filename == "" ? null : var.http_function_filename
-  code_checksum = data.alicloud_file_crc64_checksum.http.checksum
+  code_checksum = data.alicloud_file_crc64_checksum.http[0].checksum
   oss_bucket  = var.http_function_oss_bucket == "" ? null : var.http_function_oss_bucket
   oss_key     = var.http_function_oss_key == "" ? null : var.http_function_oss_key
   runtime     = var.http_function_runtime
@@ -52,6 +57,7 @@ resource "alicloud_fc_function" "events" {
   name        = var.events_function_name
   description = var.fc_function_events_description
   filename    = var.events_function_filename == "" ? null : var.events_function_filename
+  code_checksum = data.alicloud_file_crc64_checksum.events[0].checksum
   oss_bucket  = var.events_function_oss_bucket == "" ? null : var.events_function_oss_bucket
   oss_key     = var.events_function_oss_key == "" ? null : var.events_function_oss_key
   runtime     = var.events_function_runtime
