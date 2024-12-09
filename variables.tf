@@ -1,27 +1,3 @@
-# FC variables
-variable "region" {
-  description = "(Deprecated from version 1.3.0) The region used to launch this module resources."
-  type        = string
-  default     = ""
-}
-
-variable "profile" {
-  description = "(Deprecated from version 1.3.0) The profile name as set in the shared credentials file. If not set, it will be sourced from the ALICLOUD_PROFILE environment variable."
-  type        = string
-  default     = ""
-}
-
-variable "shared_credentials_file" {
-  description = "(Deprecated from version 1.3.0) This is the path to the shared credentials file. If this is not set and a profile is specified, $HOME/.aliyun/config.json will be used."
-  type        = string
-  default     = ""
-}
-
-variable "skip_region_validation" {
-  description = "(Deprecated from version 1.3.0) Skip static validation of region ID. Used by users of alternative AlibabaCloud-like APIs or users w/ access to regions that are not public (yet)."
-  type        = bool
-  default     = false
-}
 
 # FC Service Variables
 variable "create_service" {
@@ -48,10 +24,17 @@ variable "service_internet_access" {
   default     = true
 }
 
+
 variable "service_role" {
   description = "RAM role arn attached to the FC service. This governs both who / what can invoke your Function, as well as what resources our Function has access to."
   type        = string
   default     = ""
+}
+
+variable "query_service_role" {
+  description = "Whther to query service role. If you don't set 'service_role', you can use data source to query service role. Default to false."
+  type        = bool
+  default     = false
 }
 
 variable "service_role_name_regex" {
@@ -234,6 +217,12 @@ variable "events_triggers" {
 }
 
 # FC Trigger Variables
+variable "query_trigger_role" {
+  description = "Whther to query trigger role. If you don't set 'trigger_role', you can use data source to query trigger role. Default to false."
+  type        = bool
+  default     = false
+}
+
 variable "trigger_role" {
   description = "Default RAM role arn attached to the FC trigger. Role used by the event source to call the function. The value format is \"acs:ram::$account-id:role/$role-name\"."
   type        = string
@@ -262,6 +251,12 @@ variable "trigger_source_arn" {
   description = "Event source resource address."
   type        = string
   default     = ""
+}
+
+variable "query_trigger_source_arn" {
+  description = "Whther to query trigger source arn. If you don't set 'trigger_source_arn', you can use data source to query trigger source arn. Default to false."
+  type        = bool
+  default     = false
 }
 
 variable "source_role_name_regex" {
